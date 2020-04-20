@@ -1,0 +1,12 @@
+<a [routerLink]="['/', 'users']">Back to list</a>
+<hr>
+
+<ng-container *ngIf="user$ | async as user">
+  <pre>{{ user$ | async | json }}</pre>
+
+  Age: {{ age$ | async }} years
+
+  <hr>
+  <a [routerLink]="previousLink(user)">Previous user</a>
+  <a [routerLink]="nextLink(user)">Next user</a>
+</ng-container>

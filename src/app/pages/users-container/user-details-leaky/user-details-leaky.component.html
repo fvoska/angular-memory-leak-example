@@ -1,0 +1,10 @@
+<a [routerLink]="['/', 'users']">Back to list</a>
+<hr>
+
+<pre>{{ user | json }}</pre>
+
+Age: {{ age }} years
+
+<hr>
+<a [routerLink]="previousLink">Previous user</a>
+<a [routerLink]="nextLink">Next user</a>

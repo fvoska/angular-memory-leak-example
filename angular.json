@@ -123,6 +123,14 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-memory-leak-example"
+    }
+  },
+  "defaultProject": "angular-memory-leak-example",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "changeDetection": "OnPush"
+      }
+    }
+  }
 }
