@@ -12,8 +12,6 @@ import { timer, Subscription } from 'rxjs';
 export class UserDetailsLeakyComponent implements OnInit, OnDestroy {
   public user: IUser;
   public age: number;
-  private userSubscription: Subscription;
-  private timerSubscription: Subscription;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -26,12 +24,10 @@ export class UserDetailsLeakyComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((paramMap) => {
       const userId = paramMap.get('id');
 
-      // this?.userSubscription?.unsubscribe();
-      this.userSubscription = this.userService.fetch(userId).subscribe((user) => {
+      this.userService.fetch(userId).subscribe((user) => {
         this.user = user;
 
-        // this?.timerSubscription?.unsubscribe();
-        this.timerSubscription = timer(0, 1000).subscribe(() => {
+        timer(0, 1000).subscribe(() => {
           console.info(this.user.name, this.age);
           const timeAliveMs = Date.now() - user.birthDate.getTime();
           this.age = timeAliveMs / 1000 / 60 / 60 / 24 / 365;
@@ -43,9 +39,6 @@ export class UserDetailsLeakyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     console.info('Leaky component created');
-
-    // this?.timerSubscription?.unsubscribe();
-    // this?.userSubscription?.unsubscribe();
   }
 
   get previousLink() {
